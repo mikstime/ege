@@ -123,6 +123,7 @@ Response
 }
 ```
 PUT
+```
 {
     firstName: String,
     lastName: String,
