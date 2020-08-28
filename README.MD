@@ -132,10 +132,38 @@ Feedback {
     }
 }
 ``` 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
-    id: ID
+    id: ID,
+    firstName: String,
+    lastName: String,
+    egeResults: {
+        russian: Int,
+        mathProf: Int,
+        mathBase: Int,
+        biology: Int,
+        informatics: Int,
+        socialStudies: Int,
+        Physics: Int,
+        Chemistry: Int,
+        History: Int,
+        geography: Int,
+        english: Int,
+        german: Int,
+        french: Int,
+        chinese: Int,
+        Spanish: Int,
+        literature: Int,
+    }
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
+```
+{
+    Error: 'Unable to create user due to invalid input'
 }
 ```
 #### PUT /user
@@ -164,7 +192,8 @@ Response
     }
 }
 ``` 
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     id: ID,
@@ -190,10 +219,24 @@ Response
     }
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
+```
+{
+    Error: 'Unable to modify user due to invalid input'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'User can not be found'
+}
+```
 #### GET /user
 Получение информации о пользователе
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     id: ID,
@@ -217,6 +260,12 @@ Response
         Spanish: Int,
         literature: Int,
     }
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'User can not be found'
 }
 ```
 #### GET /user/programs
