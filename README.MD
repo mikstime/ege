@@ -134,7 +134,7 @@ Feedback {
 ``` 
 Responses
 
-![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
     id: ID,
@@ -193,7 +193,8 @@ Responses
 }
 ``` 
 Responses
-![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 204
 ```
 {
     id: ID,
@@ -268,10 +269,18 @@ Responses
     Error: 'User can not be found'
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
+```
+{
+    Error: 'Not authenticated'
+}
+```
 #### GET /user/programs
 Получение списка отслеживаемых направлений
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -283,6 +292,12 @@ Response
         preview : Photo
     }
 ]
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'Not authenticated'
+}
 ```
 #### GET /recommendations
 Получение списка рекомендованных пользователю вузов
@@ -311,7 +326,8 @@ Response
     preview : Photo,
 }
 ```
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
     id: ID,
@@ -322,10 +338,29 @@ Response
     preview : Photo,
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
+```
+{
+    Error: 'University can not be added due to error occured in input'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'User must have moderator permissions'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
+```
+{
+    Error: 'User must have moderator permissions'
+}
+```
 #### GET /universities
 Получить список существующих вузов
 
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -338,7 +373,10 @@ Response
 ]
 ```
 #### GET /universities/<:id>
-Получить информацию о существующем вузе по id.
+Получить информацию о существующем вузе по id
+
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     id: ID,
@@ -348,10 +386,17 @@ Response
     preview : Photo,
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'University can not be found'
+}
+```
 #### GET /universities/<:id>/photos
 Получить список фото из вуза
 
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -361,10 +406,17 @@ Response
     }
 ]
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'University can not be found'
+}
+```
 #### GET /universities/<:id>/programs
 Получить список направлений в вузе
 
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -377,6 +429,12 @@ Response
     }
 ]
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'University can not be found'
+}
+```
 #### PUT /universities/<:id>
 Изменение информации о вузе
 ```
@@ -387,7 +445,9 @@ Response
     preview : Photo,
 }
 ```
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 204
 ```
 {
     id: ID,
@@ -395,6 +455,24 @@ Response
     about: String,
     site: URL,
     preview : Photo,
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'University can not be found'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'Must have moderator permissions'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
+```
+{
+    Error: 'Must have moderator permissions'
 }
 ```
 #### POST /universities/<:id>/programs
