@@ -23,6 +23,8 @@
 | GET | /programs | Получить список всех направлений |
 | GET | /photos/<:id> | Получить фотографию |
 | POST | /feedback | Отправить отзыв |
+| GET | /feedback | Просмотреть список обращений |
+| POST | /feedback/<:id> | Посмотреть информацию об обращении |
 | GET | /search | Поиск |
 
 
@@ -89,6 +91,17 @@ Photo {
     id: ID,
     url: URL,
     description: String
+}
+```
+#### Feedback
+Feedback содержит информацию об отзыве
+```
+Feedback {
+    id: ID,
+    status: String,
+    author: ID,
+    email: EMAIL,
+    message: String,
 }
 ```
 ### Описание запросов к серверу
@@ -436,5 +449,53 @@ Response
     author: ID,
     email: EMAIL,
     message: String,
+}
+```
+Response
+```
+{
+    id: ID,
+    status: String,
+    author: ID,
+    email: EMAIL,
+    message: String,
+}
+```
+#### GET /feedback
+Получить список обращений
+
+Response
+```
+[
+    {
+        id: ID,
+        status: String,
+        author: ID,
+        email: EMAIL,
+        message: String,
+    }
+]
+```
+#### GET /feedback/<:id>
+Получить информацию об обращении
+
+Response
+```
+{{
+    id: ID,
+    status: String,
+    author: ID,
+    email: EMAIL,
+    message: String,
+}}
+```
+#### GET /search
+Осуществить поиск по вузам, фото и направлениям
+Response
+```
+{
+    photos: [Photo],
+    universities: [University],
+    programs: [EdPrograms],
 }
 ```
