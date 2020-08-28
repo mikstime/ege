@@ -17,7 +17,7 @@
 | PUT | /universities/<:id> | Изменить информацию о вузе |
 | POST | /universities/<:id>/programs | Добавить образовательную программу |
 | GET | /programs/<:id> | Получить информацию о направлении |
-| GET | /programs/<:id>/details | Получить подробную информацию о направлении |
+| GET | /programs/<:id>/enrollees | Получить список поступающих |
 | PUT | /programs/<:id> | Изменить информацию о направлении |
 | GET | /programs/<:id>/similar | Получить список похожих направлений |
 | GET | /programs | Получить список всех направлений |
@@ -243,7 +243,6 @@ Response
 ```
 {
     name: String,
-    programs: [EdProgram],
     about: String,
     photos: [Photo],
     site: URL,
@@ -255,7 +254,6 @@ Response
 {
     id: ID,
     name: String,
-    programs: [EdProgram],
     about: String,
     photos: [Photo],
     site: URL,
@@ -313,8 +311,130 @@ Response
         university: ID,
         universityName: String,
         name: String,
-        Enrollees : [Enrollee],
         preview : Photo
     }
 ]
+```
+#### PUT /universities/<:id>
+Изменение информации о вузе
+```
+{
+    name: String,
+    about: String,
+    site: URL,
+    preview : Photo,
+}
+```
+Response
+```
+{
+    id: ID,
+    name: String,
+    about: String,
+    site: URL,
+    preview : Photo,
+}
+```
+#### POST /universities/<:id>/programs
+```
+{
+    code: String,
+    university: ID,
+    name: String,
+    preview : Photo
+}
+```
+Response
+```
+{
+    id: ID,
+    code: String,
+    university: ID,
+    universityName: String,
+    name: String,
+    preview : Photo
+}
+```
+#### GET /programs/<:id>
+Полочение подробной информации о направлении
+
+Response
+```
+{
+    id: ID,
+    code: String,
+    university: ID,
+    universityName: String,
+    name: String,
+    preview : Photo
+}
+```
+#### GET /programs/<:id>/enrollees
+Получить список поступающих на направление людей
+
+Response
+```
+[
+    {
+        id: ID,
+        firstName : String,
+        lastName: String,
+        egeResults: {
+            total: Int,
+        }
+    }
+]
+```
+#### GET /programs/<:id>/similar
+Получить список направлений, похожих на данное
+
+Response
+```
+[
+    {
+        id: ID,
+        code: String,
+        university: ID,
+        universityName: String,
+        name: String,
+        preview : Photo
+    }
+]
+```
+
+#### GET /programs
+Получить список всех направлений
+
+Response
+```
+[
+    {
+        id: ID,
+        code: String,
+        university: ID,
+        universityName: String,
+        name: String,
+        preview : Photo
+    }
+]
+```
+#### GET /photos/<:id>
+Получить информацию о фото
+
+Response
+```
+{
+    id: ID,
+    url: URL,
+    description: String
+}
+```
+#### POST /feedback
+Отправить отзыв о работе
+```
+{
+    author: ID,
+    email: EMAIL,
+    message: String,
+}
 ```
