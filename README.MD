@@ -6,16 +6,15 @@
 | ----------- | ---- | ----------- |
 | POST | /user | Регистрация |
 | GET | /user | Получить информацию о пользователе |
-| PUT | /user/ | Изменить информацию о пользователе |
+| PUT | /user | Изменить информацию о пользователе |
 | GET | /user/programs | Получить список отслеживаемых направлений |
 | GET | /recommendations | Получить список рекомендованных вузов |
-| POST | /universities/ | Добавить новый вуз |
-| GET | /universities/ | Получить список вузов |
-| GET | /universities/<:id> | Получить информацию о вузе |
+| POST | /universities | Добавить новый вуз |
+| GET | /universities | Получить список вузов |
 | GET | /universities/<:id> | Получить информацию о вузе |
 | GET | /universities/<:id>/photos | Получить фотографии из вуза |
-| PUT | /universities/<:id> | Изменить информацию о вузе |
 | GET | /universities/<:id>/programs | Получить информацию об образовательных программах |
+| PUT | /universities/<:id> | Изменить информацию о вузе |
 | POST | /universities/<:id>/programs | Добавить образовательную программу |
 | GET | /programs/<:id> | Получить информацию о направлении |
 | GET | /programs/<:id>/details | Получить подробную информацию о направлении |
@@ -30,11 +29,6 @@
 ### Структуры данных
 #### Enrollee
 Enrollee служит для хранения подробной информации о пользователе, включая информацию об избранном и результатах ЕГЭ
-История
-Информатика и информационно-коммуникационные технологии (ИКТ) 
-Биология
-География
-Литература 
 ```
 Enrollee {
     id: ID,
@@ -45,6 +39,8 @@ Enrollee {
         russian: Int,
         mathProf: Int,
         mathBase: Int,
+        biology: Int,
+        informatics: Int,
         socialStudies: Int,
         Physics: Int,
         Chemistry: Int,
@@ -64,35 +60,40 @@ Enrollee {
 EdProgram - сущность, отвечающая за хранение информации об образовательном направлении
 ```
 EdProgram {
+    id: ID,
     code: String,
-    university: Id,
+    university: ID,
+    universityName: String,
     name: String,
-    Enrollees : [Enrollee]
+    Enrollees : [Enrollee],
+    preview : Photo
 }
 ```
 #### University
 University хранит в себе информацию о вузе, а также список направлений, содержащихся в вузе
 ```
 University {
-    id: Id,
+    id: ID,
     name: String,
     programs: [EdProgram],
     about: String,
     photos: [Photo],
     site: URL,
+    preview : Photo,
 }
 ```
 #### Photo
 Photo содержит информацию о картинке
 ```
-University {
+Photo {
+    id: ID,
     url: URL,
     description: String
 }
 ```
 ### Описание запросов к серверу
-#### /user
-#### POST - Создание нового пользователя.
+#### POST /user
+Создание нового пользователя.
 Тело запроса
 ```
 {
@@ -102,6 +103,8 @@ University {
         russian: Int,
         mathProf: Int,
         mathBase: Int,
+        biology: Int,
+        informatics: Int,
         socialStudies: Int,
         Physics: Int,
         Chemistry: Int,
@@ -122,7 +125,8 @@ Response
     id: ID
 }
 ```
-PUT
+#### PUT /user
+Изменение уже существующего пользователя
 ```
 {
     firstName: String,
@@ -131,6 +135,8 @@ PUT
         russian: Int,
         mathProf: Int,
         mathBase: Int,
+        biology: Int,
+        informatics: Int,
         socialStudies: Int,
         Physics: Int,
         Chemistry: Int,
@@ -148,13 +154,15 @@ PUT
 Response
 ```
 {
-    id: ID
+    id: ID,
     firstName: String,
     lastName: String,
     egeResults: {
         russian: Int,
         mathProf: Int,
         mathBase: Int,
+        biology: Int,
+        informatics: Int,
         socialStudies: Int,
         Physics: Int,
         Chemistry: Int,
@@ -166,7 +174,147 @@ Response
         chinese: Int,
         Spanish: Int,
         literature: Int,
-    },
-    chosenPrograms: [EdProgram]
+    }
 }
+```
+#### GET /user
+Получение информации о пользователе
+
+Response
+```
+{
+    id: ID,
+    firstName: String,
+    lastName: String,
+    egeResults: {
+        russian: Int,
+        mathProf: Int,
+        mathBase: Int,
+        biology: Int,
+        informatics: Int,
+        socialStudies: Int,
+        Physics: Int,
+        Chemistry: Int,
+        History: Int,
+        geography: Int,
+        english: Int,
+        german: Int,
+        french: Int,
+        chinese: Int,
+        Spanish: Int,
+        literature: Int,
+    }
+}
+```
+#### GET /user/programs
+Получение списка отслеживаемых направлений
+
+Response
+```
+[
+    {
+        id: ID,
+        code: String,
+        university: ID,
+        universityName: String,
+        name: String,
+        preview : Photo
+    }
+]
+```
+#### GET /recommendations
+Получение списка рекомендованных пользователю вузов
+
+Response
+```
+[
+    {
+        id: ID,
+        name: String,
+        about: String,
+        photos: [Photo],
+        site: URL,
+        preview : Photo
+    }
+]
+```
+#### POST /universities
+Создать новый университет. Доступно только модератору.
+```
+{
+    name: String,
+    programs: [EdProgram],
+    about: String,
+    photos: [Photo],
+    site: URL,
+    preview : Photo,
+}
+```
+Response
+```
+{
+    id: ID,
+    name: String,
+    programs: [EdProgram],
+    about: String,
+    photos: [Photo],
+    site: URL,
+    preview : Photo,
+}
+```
+#### GET /universities
+Получить список существующих вузов
+
+Response
+```
+[
+    {
+        id: ID,
+        name: String,
+        about: String,
+        site: URL,
+        preview : Photo,
+    }
+]
+```
+#### GET /universities/<:id>
+Получить информацию о существующем вузе по id.
+```
+{
+    id: ID,
+    name: String,
+    about: String,
+    site: URL,
+    preview : Photo,
+}
+```
+#### GET /universities/<:id>/photos
+Получить список фото из вуза
+
+Response
+```
+[
+    {
+        id: ID,
+        url: URL,
+        description: String
+    }
+]
+```
+#### GET /universities/<:id>/programs
+Получить список направлений в вузе
+
+Response
+```
+[
+    {
+        id: ID,
+        code: String,
+        university: ID,
+        universityName: String,
+        name: String,
+        Enrollees : [Enrollee],
+        preview : Photo
+    }
+]
 ```
