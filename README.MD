@@ -142,7 +142,7 @@ Feedback {
     }
 }
 ``` 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
@@ -202,7 +202,7 @@ Responses
     }
 }
 ``` 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 204
 ```
@@ -245,7 +245,7 @@ Responses
 #### GET /user
 Получение информации о пользователе
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -288,7 +288,7 @@ Responses
 #### GET /user/programs
 Получение списка отслеживаемых направлений
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -312,7 +312,7 @@ Responses
 #### GET /recommendations
 Получение списка рекомендованных пользователю вузов
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -338,7 +338,7 @@ Responses
     preview : Photo!,
 }
 ```
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
@@ -371,8 +371,19 @@ Responses
 ```
 #### GET /universities
 Получить список существующих вузов
+___
+Параметры запроса
+`sort` - asc | desc | related
 
-Responses
+`asc` - По алфавиту; 
+`desc` - В обратном порядке; 
+`related` - По степени рекомендованности пользователю;
+
+`page` - номер страницы
+
+`size` - колличество записей на странице (значение по умолчанию `10`).
+___
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -389,7 +400,7 @@ Responses
 #### GET /universities/<:id>
 Получить информацию о существующем вузе по id
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -410,7 +421,7 @@ Responses
 #### GET /universities/<:id>/photos
 Получить список фото из вуза
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -431,7 +442,7 @@ Responses
 #### GET /universities/<:id>/programs
 Получить список направлений в вузе
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -462,7 +473,7 @@ Responses
     preview : Photo,
 }
 ```
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 204
 ```
@@ -501,7 +512,7 @@ Responses
     preview : Photo!
 }
 ```
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
@@ -535,7 +546,7 @@ Responses
 #### GET /programs/<:id>
 Полочение подробной информации о направлении
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -557,7 +568,7 @@ Responses
 #### GET /programs/<:id>/enrollees
 Получить список поступающих на направление людей
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -581,7 +592,7 @@ Responses
 #### GET /programs/<:id>/similar
 Получить список направлений, похожих на данное
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -604,8 +615,19 @@ Responses
 ```
 #### GET /programs
 Получить список всех направлений
+___
+Параметры запроса
+`sort` - asc | desc | related
 
-Responses
+`asc` - По алфавиту; 
+`desc` - В обратном порядке; 
+`related` - По степени рекомендованности пользователю;
+
+`page` - номер страницы
+
+`size` - колличество записей на странице (значение по умолчанию `10`).
+___
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -623,7 +645,7 @@ Responses
 #### GET /photos/<:id>
 Получить информацию о фото
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -648,7 +670,7 @@ Responses
     message: String!,
 }
 ```
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
@@ -669,7 +691,7 @@ Responses
 #### GET /feedback
 Получить список обращений
 
-Responses
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
@@ -712,8 +734,27 @@ Response
 ```
 #### GET /search
 Осуществить поиск по вузам, фото и направлениям
+___
+Параметры запроса
+`type` - photos | universities | programs | all (значение по умолчанию `all`)
 
-Responses
+`photos` - поиск по фото; 
+`universities` - поиск по вузам; 
+`programs` - поиск по направлениям;
+
+*Для поиска по нескольким категориям использовать символ '|'. Например, type=photos|universities*
+
+`sort` - asc | desc | related
+
+`asc` - По алфавиту; 
+`desc` - В обратном порядке; 
+`related` - По степени рекомендованности пользователю;
+
+`page` - номер страницы
+
+`size` - колличество записей на странице (значение по умолчанию `10`).
+___
+Ответы сервера
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
