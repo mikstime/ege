@@ -229,7 +229,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'User can not be found'
+    Error: 'User cannot be found'
 }
 ```
 #### GET /user
@@ -266,7 +266,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'User can not be found'
+    Error: 'User cannot be found'
 }
 ```
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
@@ -341,7 +341,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
 ```
 {
-    Error: 'University can not be added due to error occured in input'
+    Error: 'University cannot be added due to error occured in input'
 }
 ```
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
@@ -389,7 +389,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'University can not be found'
+    Error: 'University cannot be found'
 }
 ```
 #### GET /universities/<:id>/photos
@@ -409,7 +409,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'University can not be found'
+    Error: 'University cannot be found'
 }
 ```
 #### GET /universities/<:id>/programs
@@ -432,7 +432,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'University can not be found'
+    Error: 'University cannot be found'
 }
 ```
 #### PUT /universities/<:id>
@@ -460,7 +460,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
 ```
 {
-    Error: 'University can not be found'
+    Error: 'University cannot be found'
 }
 ```
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
@@ -484,7 +484,8 @@ Responses
     preview : Photo
 }
 ```
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
     id: ID,
@@ -493,12 +494,31 @@ Response
     universityName: String,
     name: String,
     preview : Photo
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'Only moderator can create universities'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
+```
+{
+    Error: 'Only moderator can create universities'
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
+```
+{
+    Error: 'Can not create university due to incorrect input'
 }
 ```
 #### GET /programs/<:id>
 Полочение подробной информации о направлении
 
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     id: ID,
@@ -509,10 +529,18 @@ Response
     preview : Photo
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'Educational program cannot be found'
+}
+```
 #### GET /programs/<:id>/enrollees
 Получить список поступающих на направление людей
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -525,10 +553,18 @@ Response
     }
 ]
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'Educational Program cannot be found'
+}
+```
 #### GET /programs/<:id>/similar
 Получить список направлений, похожих на данное
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -541,11 +577,18 @@ Response
     }
 ]
 ```
-
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'Educational Program cannot be found'
+}
+```
 #### GET /programs
 Получить список всех направлений
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -561,12 +604,20 @@ Response
 #### GET /photos/<:id>
 Получить информацию о фото
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     id: ID,
     url: URL,
     description: String
+}
+```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Not Found 404
+```
+{
+    Error: 'Photo cannot be found'
 }
 ```
 #### POST /feedback
@@ -578,7 +629,8 @@ Response
     message: String,
 }
 ```
-Response
+Responses
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
     id: ID,
@@ -588,10 +640,18 @@ Response
     message: String,
 }
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
+```
+{
+    Error: 'Cannot create a feedback request due to incorrect input'
+}
+```
 #### GET /feedback
 Получить список обращений
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -603,10 +663,18 @@ Response
     }
 ]
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'Need to authorize'
+}
+```
 #### GET /feedback/<:id>
 Получить информацию об обращении
 
 Response
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {{
     id: ID,
@@ -616,9 +684,17 @@ Response
     message: String,
 }}
 ```
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Unauthorized 401
+```
+{
+    Error: 'Need to authorize'
+}
+```
 #### GET /search
 Осуществить поиск по вузам, фото и направлениям
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
     photos: [Photo],
