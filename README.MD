@@ -27,10 +27,10 @@
 | POST | /feedback/<:id> | Посмотреть информацию об обращении |
 | GET | /search | Поиск |
 
-
 ### Структуры данных
 #### Enrollee
-Enrollee служит для хранения подробной информации о пользователе, включая информацию об избранном и результатах ЕГЭ
+`Enrollee` служит для хранения подробной информации о пользователе, 
+включая информацию об избранном и результатах ЕГЭ
 ```
 Enrollee {
     id: ID,
@@ -59,7 +59,8 @@ Enrollee {
 }
 ```
 #### EdProgram
-EdProgram - сущность, отвечающая за хранение информации об образовательном направлении
+`EdProgram` - сущность, отвечающая за хранение информации об 
+образовательном направлении
 ```
 EdProgram {
     id: ID,
@@ -72,7 +73,8 @@ EdProgram {
 }
 ```
 #### University
-University хранит в себе информацию о вузе, а также список направлений, содержащихся в вузе
+`University` хранит в себе информацию о вузе, а также список направлений, 
+содержащихся в вузе
 ```
 University {
     id: ID,
@@ -85,7 +87,7 @@ University {
 }
 ```
 #### Photo
-Photo содержит информацию о картинке
+`Photo` содержит информацию о картинке
 ```
 Photo {
     id: ID,
@@ -94,7 +96,7 @@ Photo {
 }
 ```
 #### Feedback
-Feedback содержит информацию об отзыве
+`Feedback` содержит информацию об отзыве
 ```
 Feedback {
     id: ID,
@@ -105,9 +107,17 @@ Feedback {
 }
 ```
 ### Описание запросов к серверу
+#### Основные обозначения
+`!` - Обязательное поле
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) - Запрос успешно обработан
+
+![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) - Ошибка при обработке запроса
+
+---
 #### POST /user
 Создание нового пользователя.
-Тело запроса
+Тело запроса.
 ```
 {
     firstName: String,
@@ -302,7 +312,9 @@ Responses
 #### GET /recommendations
 Получение списка рекомендованных пользователю вузов
 
-Response
+Responses
+
+![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
     {
@@ -319,14 +331,15 @@ Response
 Создать новый университет. Доступно только модератору.
 ```
 {
-    name: String,
-    about: String,
-    photos: [Photo],
+    name: String!,
+    about: String!,
+    photos: [Photo!],
     site: URL,
-    preview : Photo,
+    preview : Photo!,
 }
 ```
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
@@ -360,6 +373,7 @@ Responses
 Получить список существующих вузов
 
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
@@ -376,6 +390,7 @@ Responses
 Получить информацию о существующем вузе по id
 
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
@@ -396,6 +411,7 @@ Responses
 Получить список фото из вуза
 
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
@@ -416,6 +432,7 @@ Responses
 Получить список направлений в вузе
 
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 [
@@ -478,13 +495,14 @@ Responses
 #### POST /universities/<:id>/programs
 ```
 {
-    code: String,
-    university: ID,
-    name: String,
-    preview : Photo
+    code: String!,
+    university: ID!,
+    name: String!,
+    preview : Photo!
 }
 ```
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
@@ -505,7 +523,7 @@ Responses
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Conflict 409
 ```
 {
-    Error: 'Only moderator can create universities'
+    Error: 'University does not exist'
 }
 ```
 ![#D32D2D](https://via.placeholder.com/15/D32D2D/000000?text=+) Bad request 400
@@ -518,6 +536,7 @@ Responses
 Полочение подробной информации о направлении
 
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
 ```
 {
@@ -624,12 +643,13 @@ Responses
 Отправить отзыв о работе
 ```
 {
-    author: ID,
-    email: EMAIL,
-    message: String,
+    author: ID!,
+    email: EMAIL!,
+    message: String!,
 }
 ```
 Responses
+
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 201
 ```
 {
@@ -692,6 +712,7 @@ Response
 ```
 #### GET /search
 Осуществить поиск по вузам, фото и направлениям
+
 Responses
 
 ![#60D32D](https://via.placeholder.com/15/60D32D/000000?text=+) Success 200
