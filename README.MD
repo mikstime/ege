@@ -11,8 +11,42 @@ ___
 отслеживать списки поступающих и узнать вероятность поступления 
 на конкретное направление.
 
+### Содержание
+
+   * [//@TODO секция](#todo-секция)
+   * [API](#api)
+   * [Структуры данных](#структуры-данных)
+       * [Enrollee](#enrollee)
+       * [EdProgram](#edprogram)
+       * [University](#university)
+       * [Photo](#photo)
+       * [Feedback](#feedback)
+   * [Описание запросов к серверу](#описание-запросов-к-серверу)
+       * [Основные обозначения](#основные-обозначения)
+       * [POST /user](#post-user)
+       * [PUT /user](#put-user)
+       * [GET /user](#get-user)
+       * [GET /user/programs](#get-userprograms)
+       * [GET /recommendations](#get-recommendations)
+       * [POST /universities](#post-universities)
+       * [GET /universities](#get-universities)
+       * [GET /universities/&lt;:id&gt;](#get-universitiesid)
+       * [GET /universities/&lt;:id&gt;/photos](#get-universitiesidphotos)
+       * [GET /universities/&lt;:id&gt;/programs](#get-universitiesidprograms)
+       * [PUT /universities/&lt;:id&gt;](#put-universitiesid)
+       * [POST /universities/&lt;:id&gt;/programs](#post-universitiesidprograms)
+       * [GET /programs/&lt;:id&gt;](#get-programsid)
+       * [GET /programs/&lt;:id&gt;/enrollees](#get-programsidenrollees)
+       * [GET /programs/&lt;:id&gt;/similar](#get-programsidsimilar)
+       * [GET /programs](#get-programs)
+       * [GET /photos/&lt;:id&gt;](#get-photosid)
+       * [POST /feedback](#post-feedback)
+       * [GET /feedback](#get-feedback)
+       * [GET /feedback/&lt;:id&gt;](#get-feedbackid)
+       * [GET /search](#get-search)
+            
 ___
-//@TODO TODO секция
+### //@TODO секция
 
 `
 Необходимо разработать архитектуру проекта
@@ -33,6 +67,10 @@ ___
 
 `
 Необходимо хранить в вузе рейтинг из гугл карт, счетчик числа направлений и место в рейтинге QS
+`
+
+`
+Сделать привязку вузов к карте.
 `
 
 ___
